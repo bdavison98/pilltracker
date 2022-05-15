@@ -1,0 +1,10 @@
+{
+  "resourceName": "doctorsTable",
+  "tableName": "doctors",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

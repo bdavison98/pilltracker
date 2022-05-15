@@ -1,0 +1,340 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pilltracker-dev-31744-authRole",
+      "UnauthRoleArn": "arn:aws:iam::293486737023:role/amplify-pilltracker-dev-31744-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::293486737023:role/amplify-pilltracker-dev-31744-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+      "UnauthRoleName": "amplify-pilltracker-dev-31744-unauthRole",
+      "StackName": "amplify-pilltracker-dev-31744",
+      "StackId": "arn:aws:cloudformation:us-east-1:293486737023:stack/amplify-pilltracker-dev-31744/a0c70c30-d1c3-11ec-857d-1260de179055",
+      "AmplifyAppId": "d3d5dioi4ciqtm",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    }
+  },
+  "storage": {
+    "medsTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/storage/medsTable-cloudformation-template.json",
+        "logicalId": "storagemedsTable"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:293486737023:table/Medications-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:293486737023:table/Medications-dev/stream/2022-05-12T10:41:42.143",
+        "PartitionKeyType": "S",
+        "Name": "Medications-dev"
+      },
+      "lastPushDirHash": "+zUG6fOWyZjE9FqNOOSfqgsb2eY="
+    },
+    "patientTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/storage/patientTable-cloudformation-template.json",
+        "logicalId": "storagepatientTable"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:293486737023:table/patients-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:293486737023:table/patients-dev/stream/2022-05-12T10:41:42.032",
+        "PartitionKeyType": "S",
+        "Name": "patients-dev"
+      },
+      "lastPushDirHash": "tF/UuDEZfCe1hr6bX8ZP38Tz2Bc="
+    },
+    "doctorsTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/storage/doctorsTable-cloudformation-template.json",
+        "logicalId": "storagedoctorsTable"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:293486737023:table/doctors-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:293486737023:table/doctors-dev/stream/2022-05-12T10:41:42.919",
+        "PartitionKeyType": "S",
+        "Name": "doctors-dev"
+      },
+      "lastPushDirHash": "Stdk09JPSOLm6mHxfhKvvWegNRU="
+    },
+    "pharmacyTable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/storage/pharmacyTable-cloudformation-template.json",
+        "logicalId": "storagepharmacyTable"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:293486737023:table/pharmacies-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:293486737023:table/pharmacies-dev/stream/2022-05-12T10:41:42.828",
+        "PartitionKeyType": "S",
+        "Name": "pharmacies-dev"
+      },
+      "lastPushDirHash": "cye7LcOVOSTuoryXi2FU47WCWBA="
+    }
+  },
+  "function": {
+    "medsLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "medsTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2022-05-12T10:41:12.609Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-05-12T10:41:14.300Z",
+      "distZipFilename": "medsLambda-59413576716c754f5455-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+        "s3Key": "amplify-builds/medsLambda-59413576716c754f5455-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/function/medsLambda-cloudformation-template.json",
+        "logicalId": "functionmedsLambda"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:293486737023:function:medsLambda-dev",
+        "Name": "medsLambda-dev",
+        "LambdaExecutionRole": "pilltrackerLambdaRole93d35b9d-dev"
+      },
+      "lastPushDirHash": "CwuThfnOn7EtoB+/XV+zh/a91r0="
+    },
+    "pateintLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "patientTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2022-05-12T10:41:12.612Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-05-12T10:41:14.319Z",
+      "distZipFilename": "pateintLambda-6f7961682b677873484f-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+        "s3Key": "amplify-builds/pateintLambda-6f7961682b677873484f-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/function/pateintLambda-cloudformation-template.json",
+        "logicalId": "functionpateintLambda"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:293486737023:function:pateintLambda-dev",
+        "Name": "pateintLambda-dev",
+        "LambdaExecutionRole": "pilltrackerLambdaRole488243f5-dev"
+      },
+      "lastPushDirHash": "A0MFrVZ5w/O57N/CJDGjvDgTv+8="
+    },
+    "doctorsLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "doctorsTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2022-05-12T10:41:12.612Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-05-12T10:41:14.333Z",
+      "distZipFilename": "doctorsLambda-436854444675714a4961-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+        "s3Key": "amplify-builds/doctorsLambda-436854444675714a4961-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/function/doctorsLambda-cloudformation-template.json",
+        "logicalId": "functiondoctorsLambda"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:293486737023:function:doctorsLambda-dev",
+        "Name": "doctorsLambda-dev",
+        "LambdaExecutionRole": "pilltrackerLambdaRole7d61ad3b-dev"
+      },
+      "lastPushDirHash": "njR839EIdT3XjHgp7W/NwN61xqs="
+    },
+    "pharmacyLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "pharmacyTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2022-05-12T10:41:12.613Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-05-12T10:41:14.339Z",
+      "distZipFilename": "pharmacyLambda-73456a4f4f4f58494951-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+        "s3Key": "amplify-builds/pharmacyLambda-73456a4f4f4f58494951-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/function/pharmacyLambda-cloudformation-template.json",
+        "logicalId": "functionpharmacyLambda"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:293486737023:function:pharmacyLambda-dev",
+        "Name": "pharmacyLambda-dev",
+        "LambdaExecutionRole": "pilltrackerLambdaRolefa668eb5-dev"
+      },
+      "lastPushDirHash": "2kbQlBbQQtPgBgQtTmgi/dZlGYY="
+    }
+  },
+  "auth": {
+    "pilltracker": {
+      "service": "Cognito",
+      "serviceType": "managed",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/auth/pilltracker-cloudformation-template.json",
+        "logicalId": "authpilltracker"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "UserPoolId": "us-east-1_hHcty4ZZA",
+        "AppClientIDWeb": "he20lg5ocv6udtn02f95sr5pi",
+        "AppClientID": "13chp967fk3b1oj8gq5lthrf3b",
+        "IdentityPoolId": "us-east-1:376e2fd5-81d4-47da-ab5d-2ecec25ba88c",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:293486737023:userpool/us-east-1_hHcty4ZZA",
+        "IdentityPoolName": "pilltracker_identitypool_8159257a__dev",
+        "UserPoolName": "pilltracker_userpool_8159257a"
+      },
+      "lastPushDirHash": "1/wwi7POzsOi4OUs3IMM2hZlIKo="
+    }
+  },
+  "api": {
+    "meds": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "medsLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "pateintLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "doctorsLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "pharmacyLambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/api/meds-cloudformation-template.json",
+        "logicalId": "apimeds"
+      },
+      "lastPushTimeStamp": "2022-05-12T10:44:42.847Z",
+      "output": {
+        "ApiName": "meds",
+        "RootUrl": "https://phcsjyr8u4.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "phcsjyr8u4"
+      },
+      "lastPushDirHash": "9rdsAeBdKAn6/hKwIp20iNoI8SA="
+    }
+  }
+}

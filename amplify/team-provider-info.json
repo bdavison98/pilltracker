@@ -1,0 +1,40 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pilltracker-dev-31744-authRole",
+      "UnauthRoleArn": "arn:aws:iam::293486737023:role/amplify-pilltracker-dev-31744-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::293486737023:role/amplify-pilltracker-dev-31744-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+      "UnauthRoleName": "amplify-pilltracker-dev-31744-unauthRole",
+      "StackName": "amplify-pilltracker-dev-31744",
+      "StackId": "arn:aws:cloudformation:us-east-1:293486737023:stack/amplify-pilltracker-dev-31744/a0c70c30-d1c3-11ec-857d-1260de179055",
+      "AmplifyAppId": "d3d5dioi4ciqtm",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-pilltracker-dev-31744-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "undefined": {},
+        "false": {}
+      },
+      "function": {
+        "pharmacyLambda": {
+          "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+          "s3Key": "amplify-builds/pharmacyLambda-73456a4f4f4f58494951-build.zip"
+        },
+        "medsLambda": {
+          "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+          "s3Key": "amplify-builds/medsLambda-59413576716c754f5455-build.zip"
+        },
+        "doctorsLambda": {
+          "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+          "s3Key": "amplify-builds/doctorsLambda-436854444675714a4961-build.zip"
+        },
+        "pateintLambda": {
+          "deploymentBucketName": "amplify-pilltracker-dev-31744-deployment",
+          "s3Key": "amplify-builds/pateintLambda-6f7961682b677873484f-build.zip"
+        }
+      }
+    }
+  }
+}

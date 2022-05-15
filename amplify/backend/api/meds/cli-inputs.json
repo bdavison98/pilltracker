@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "paths": {
+    "/medications": {
+      "name": "/medications",
+      "lambdaFunction": "medsLambda",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "guest": [
+          "read"
+        ]
+      }
+    },
+    "/patients": {
+      "name": "/patients",
+      "lambdaFunction": "pateintLambda",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/doctors": {
+      "name": "/doctors",
+      "lambdaFunction": "doctorsLambda",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/pharmacies": {
+      "name": "/pharmacies",
+      "lambdaFunction": "pharmacyLambda",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

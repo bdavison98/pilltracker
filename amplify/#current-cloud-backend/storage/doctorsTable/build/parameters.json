@@ -1,0 +1,5 @@
+{
+  "tableName": "doctors",
+  "partitionKeyName": "id",
+  "partitionKeyType": "S"
+}

@@ -1,0 +1,10 @@
+{
+  "resourceName": "pharmacyTable",
+  "tableName": "pharmacies",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
