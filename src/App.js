@@ -8,9 +8,6 @@ import { useEffect } from 'react'
 const url = 'https://api.jsonbin.io/b/6281f81a38be296761070d9c/2'
 
 function App() {
-    const a = ['a', 'b', 'c']
-
-
     return (
         <div className="App h-screen bg-gray-900">
             <div className='p-24 h-full text-white p-10'>
@@ -23,7 +20,8 @@ export default App;
 
 
 function MyMeds() {
-    const [rows, setRows] = useState()
+
+    const [rows, setRows] = useState([])
     const [loading, setLoading] = useState(false)
     const [addMed, setAddMed] = useState(false)
 
@@ -37,7 +35,9 @@ function MyMeds() {
             throw new Error(e)
         }
         const medications = await response.json()
+
         return medications
+    
     }
 
     useEffect(() => {
@@ -56,12 +56,12 @@ function MyMeds() {
             <h1 className='text-4xl text-left'>My Medications</h1>
             <div className='flex-wrap content-center mt-16 mb-10'>
                 {rows && rows.length > 0 && <MedTable rows={rows} setRows={setRows} />}
-                {rows.length <= 0 && <><p>Looking empty in here...</p></>}
+                {rows.length<= 0 && <><p>Looking empty in here...</p></>}
             </div>
             <div className=''>
                 <button className='rounded-lg border-2 p-2 block' onClick={() => setAddMed(!addMed)}>
                     {addMed ? 'Close' : 'New Medication'}
-                </button>
+                </button> 
                 {addMed && <MedForm rows={rows} setRows={setRows} />}
             </div>
 
@@ -72,9 +72,63 @@ function MyMeds() {
 function MedTable({ rows, setRows }) {
 
     // delete(): rows, i => setSetRows(row[i].remove)
+    const [nameE, setName] = useState('')
+    const [amountE, setAmount] = useState('')
+    const [dosageE, setDosage] = useState('')
+    const [costE, setCost] = useState('')
+    const [currentRow, setCurrent] = useState({})
+    const [submitted, setSubmitted] = useState(false)
+    const [showForm, setShowForm] = useState(false)
+
+   
 
     function handleRowDel(id) {
         setRows(rows.filter(pill => pill.id !== id))
+        setCurrent({})
+    }
+
+    function handleEditRow(id) {
+        // Edit Row
+        // get a the row by id: row[i]
+        // set it equal to the new
+        setShowForm(false)
+        let temp = [...rows]
+        let item = temp[id]
+        item.name = nameE
+        item.amount = amountE
+        item.dosage = dosageE
+        item.cost = costE
+
+        temp[id] = item
+
+        setRows(temp)
+        onSubmitChange()
+    }
+    
+    function handleEditClick(id) {
+        let temp = [...rows]
+        let current = temp[id]
+
+        setCurrent(current)
+        
+
+        setName(current.name)
+        setAmount(current.amount)
+        setDosage(current.dosage)
+        setCost(current.cost)
+        
+        setShowForm(!showForm)
+        //show edit form
+    }
+
+
+    function onSubmitChange() {
+        setShowForm(false)
+        setCurrent({})
+        setName('')
+        setAmount('')
+        setDosage('')
+        setCost('')
     }
 
     const meds = rows.map((pill) => (
@@ -85,7 +139,7 @@ function MedTable({ rows, setRows }) {
             <td className='bg-gray-800' key={pill.id}>${pill.cost}</td>
             <td className='bg-gray-800' key={pill.id}>
                 <td className=''>
-                    <button className='ml-16 pr-2 text-2xl'>{pill.actions.edit}</button>
+                    <button className='ml-16 pr-2 text-2xl' onClick={() => handleEditClick(pill.id)}>{pill.actions.edit}</button>
                 </td>
                 <td>
                     <button className='text-2xl' onClick={() => handleRowDel(pill.id)}>{pill.actions.delete}</button>
@@ -97,10 +151,33 @@ function MedTable({ rows, setRows }) {
 
 
     return (
-        <table className='rounded-t-lg'>
-            <TableHeader labels={['name', 'amount', 'dosage', 'cost', 'actions']} />
-            {meds}
-        </table>
+        <>
+            <table className='rounded-t-lg'>
+                <TableHeader labels={['name', 'amount', 'dosage', 'cost', 'actions']} />
+                {meds}
+            </table>
+            {showForm && 
+            <div className='mt-2 inline-block p-8 border rounded-lg'>
+                <p className='text-2xl'>Edit Info</p>
+                <div className='block'>
+                    <p className='underline text-left pb-2'>Name</p>
+                    <input onChange={(e) => setName(e.target.value)} value={nameE} className='rounded-md p-2 bg-gray-800 block mb-8' type='text' placeholder='Name'></input>
+                </div>
+                <div className='block'>
+                    <p className='underline text-left pb-2'>Amount</p>
+                    <input onChange={(e) => setAmount(e.target.value)} value={amountE} className='rounded-md p-2 bg-gray-800 block mb-8' type='text' placeholder='30'></input>
+                </div>
+                <div className='block'>
+                    <p className='underline text-left pb-2'>Dosage</p>
+                    <input onChange={(e) => setDosage(e.target.value)} value={dosageE} className='rounded-md p-2 bg-gray-800 block mb-8' type='text' placeholder='500'></input>
+                </div>
+                <div className='block'>
+                    <p className='underline text-left pb-2'>Cost</p>
+                    <input onChange={(e) => setCost(e.target.value)} value={costE} className='rounded-md p-2 bg-gray-800 block mb-8' type='text' placeholder='5.99'></input>
+                </div>
+                <button onClick={() => handleEditRow(currentRow.id)} className='rounded-lg border-2 p-2'> submit changes </button>
+            </div>}
+        </>
 
     )
 }
